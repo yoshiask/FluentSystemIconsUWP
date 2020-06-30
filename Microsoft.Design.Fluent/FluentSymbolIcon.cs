@@ -41,22 +41,22 @@ namespace Microsoft.Design.Fluent
             base.OnApplyTemplate();
 
             if (this.GetTemplateChild("ImageDisplay") is Image id)
+            {
                 this.imageDisplay = id;
+                // Awkward workaround for a weird bug where imageDisplay is null
+                // when OnSymbolChanged fires in a newly created FluentSymbolIcon
+                Symbol = Symbol;
+            }
         }
 
         private static void OnSymbolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int) && self.imageDisplay != null)
             {
-                FluentSymbol val = (FluentSymbol)e.NewValue;
-                // Check to see if Value really changed, else this was invoked because of boxing
-                if (val != (FluentSymbol)e.OldValue)
+                // Set internal Image to the SvgImageSource from the look-up table
+                if (AllFluentIcons.TryGetValue((FluentSymbol)e.NewValue, out SvgImageSource svgSource))
                 {
-                    // TODO: Set internal Image to the SvgImageSource from the look-up table
-                    if (AllFluentIcons.TryGetValue(val, out SvgImageSource svgSource))
-                    {
-                        self.imageDisplay.Source = svgSource;
-                    }
+                    self.imageDisplay.Source = svgSource;
                 }
             }
         }
