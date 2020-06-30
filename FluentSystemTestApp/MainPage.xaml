@@ -7,17 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fluent="using:Microsoft.Design.Fluent"
     mc:Ignorable="d"
-    RequestedTheme="Light"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <NavigationView>
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Navigate">
+                <NavigationViewItem.Icon>
+                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(497)}"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Discover">
+                <NavigationViewItem.Icon>
+                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(1089)}"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Explore">
+                <NavigationViewItem.Icon>
+                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(770)}"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Favorites">
+                <NavigationViewItem.Icon>
+                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(661)}"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
 
-        <Button>
-            <fluent:FluentSymbolIcon Symbol="Add" />
-        </Button>
-    </Grid>
+        <ListView ItemsSource="{x:Bind fluent:FluentSymbolIcon.AllFluentIcons.Values}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <ListViewItem>
+                        <PathIcon Data="{x:Bind}"/>
+                    </ListViewItem>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </NavigationView>
 </Page>

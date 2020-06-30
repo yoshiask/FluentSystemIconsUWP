@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -16,7 +8,7 @@ namespace Microsoft.Design.Fluent
 {
     public partial class FluentSymbolIcon : Control
     {
-        private Image imageDisplay;
+        private PathIcon iconDisplay;
 
         public FluentSymbolIcon()
         {
@@ -40,10 +32,10 @@ namespace Microsoft.Design.Fluent
         {
             base.OnApplyTemplate();
 
-            if (this.GetTemplateChild("ImageDisplay") is Image id)
+            if (this.GetTemplateChild("IconDisplay") is PathIcon pi)
             {
-                this.imageDisplay = id;
-                // Awkward workaround for a weird bug where imageDisplay is null
+                this.iconDisplay = pi;
+                // Awkward workaround for a weird bug where iconDisplay is null
                 // when OnSymbolChanged fires in a newly created FluentSymbolIcon
                 Symbol = Symbol;
             }
@@ -51,14 +43,37 @@ namespace Microsoft.Design.Fluent
 
         private static void OnSymbolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int) && self.imageDisplay != null)
+            if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int) && self.iconDisplay != null)
             {
                 // Set internal Image to the SvgImageSource from the look-up table
-                if (AllFluentIcons.TryGetValue((FluentSymbol)e.NewValue, out SvgImageSource svgSource))
-                {
-                    self.imageDisplay.Source = svgSource;
-                }
+                self.iconDisplay.Data = GetPathData((FluentSymbol)e.NewValue);
             }
         }
+
+        public static PathIcon GetPathIcon(FluentSymbol symbol)
+        {
+            return new PathIcon {
+                Data = (Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), GetPathData(symbol)),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+        }
+        
+        public static Geometry GetPathData(int symbol)
+        {
+            return GetPathData((FluentSymbol)symbol);
+        }
+        public static Geometry GetPathData(FluentSymbol symbol)
+        {
+            if (AllFluentIcons.TryGetValue(symbol, out string pathData))
+            {
+                return (Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), pathData);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
     }
 }

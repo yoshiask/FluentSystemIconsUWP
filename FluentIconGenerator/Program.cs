@@ -48,7 +48,7 @@ namespace FluentIconGenerator
 
             PropertyDeclarationSyntax allFluentIconsProp =
                 SF.PropertyDeclaration(
-                    SF.ParseTypeName("Dictionary<FluentSymbol, SvgImageSource>"),
+                    SF.ParseTypeName("Dictionary<FluentSymbol, string>"),
                     "AllFluentIcons"
                 )
                 .AddModifiers(SF.Token(SyntaxKind.PublicKeyword))
@@ -60,7 +60,7 @@ namespace FluentIconGenerator
                     }
                 )))
                 .WithInitializer(SF.EqualsValueClause(SF.ObjectCreationExpression(
-                    SF.ParseTypeName("Dictionary<FluentSymbol, SvgImageSource>"),
+                    SF.ParseTypeName("Dictionary<FluentSymbol, string>"),
                     null,
                     SF.InitializerExpression(
                         SyntaxKind.CollectionInitializerExpression,
@@ -86,22 +86,27 @@ namespace FluentIconGenerator
                 bool isFilled = match.Groups[2].Value == "filled";
                 string name = file.Split('\\')[0].Replace(" ", "") + (isFilled ? "Filled" : "");
 
-                #region SVG reading (dead code)
-                // Load the path data into a PathIcon
-                //var svg = SvgDocument.Open(path);
-                //var iconRootElem = svg.Children.FindSvgElementOf<SvgGroup>();
-                //var iconElem = iconRootElem.Children[0];
-                //SvgPath pathElem = iconElem.Children.FindSvgElementOf<SvgPath>();
-                //string xamlPathElem = "new PathIcon {\r\n\tData = (Windows.UI.Xaml.Media.Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), \""
-                //    + pathElem.PathData.ToString() + "\"),\r\n\tHorizontalAlignment = HorizontalAlignment.Center,\r\n\tVerticalAlignment = VerticalAlignment.Center\r\n};";
-                //File.WriteAllText(outputFile, xamlPathElem);
+                #region SVG reading
+                // Load the path data into a string
+                var svg = new XmlDocument();
+                svg.Load(path);
+                // create ns manager
+                XmlNamespaceManager xmlnsManager = new XmlNamespaceManager(svg.NameTable);
+                xmlnsManager.AddNamespace("svg", "http://www.w3.org/2000/svg");
+
+                XmlNodeList list = svg.LastChild.SelectNodes("//svg:path", xmlnsManager);
+                string xamlPathData = "";
+                foreach (XmlNode pathElem in list)
+                {
+                    xamlPathData += pathElem.Attributes["d"].Value + " ";
+                }
                 #endregion
 
                 // Copy the SVG file to the Assets folder in the library project
-                File.Copy(
-                    path, Path.Combine(outputProj, "Assets", "Icons", name + ".svg"),
-                    true
-                );
+                //File.Copy(
+                //    path, Path.Combine(outputProj, "Assets", "Icons", name + ".svg"),
+                //    true
+                //);
 
                 // Generate the C# source code
                 // TODO: Switch to .NET source generators
@@ -122,29 +127,9 @@ namespace FluentIconGenerator
                                     SF.Space
                                 )
                             ),
-                            SF.ObjectCreationExpression(
-                                SF.IdentifierName("SvgImageSource")
-                            )
-                            .WithNewKeyword(SF.Token(SF.TriviaList(), SyntaxKind.NewKeyword, SF.TriviaList(
-                                SF.Space
-                            )))
-                            .WithArgumentList(SF.ArgumentList(SF.SingletonSeparatedList(SF.Argument(
-                                    SF.ObjectCreationExpression(
-                                        SF.IdentifierName("Uri")
-                                    )
-                                    .WithNewKeyword(SF.Token(SF.TriviaList(), SyntaxKind.NewKeyword, SF.TriviaList(
-                                        SF.Space
-                                    )))
-                                    .WithArgumentList(SF.ArgumentList(SF.SingletonSeparatedList(SF.Argument(
-                                        SF.LiteralExpression(
-                                            SyntaxKind.StringLiteralExpression,
-                                            SF.Literal($"ms-appx:///Microsoft.Design.Fluent/Assets/Icons/{name}.svg"
-                                        )
-                                    )))))
-                                )))
-                                .WithCloseParenToken(SF.Token(SF.TriviaList(), SyntaxKind.CloseParenToken, SF.TriviaList(
-                                    SF.Space
-                                )))
+                            SF.LiteralExpression(
+                                SyntaxKind.StringLiteralExpression,
+                                SF.Literal(xamlPathData)
                             )
                         })
                     )
@@ -156,7 +141,7 @@ namespace FluentIconGenerator
 
             // Update the document
             allFluentIconsProp = allFluentIconsProp.WithInitializer(SF.EqualsValueClause(SF.ObjectCreationExpression(
-                SF.ParseTypeName("Dictionary<FluentSymbol, SvgImageSource>"),
+                SF.ParseTypeName("Dictionary<FluentSymbol, string>"),
                 null,
                 SF.InitializerExpression(
                     SyntaxKind.CollectionInitializerExpression,
