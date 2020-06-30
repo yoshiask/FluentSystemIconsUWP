@@ -1,13 +1,25 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using static Fluent.Icons.FluentSymbolIcon;
 
 namespace Fluent.Icons
 {
     // NOTE: It appears that the only thing preventing this library from
     // having a minimum Win10 version of 16299 is PathIconSource.
-    public partial class FluentIconSource : PathIconSource
+    /// <summary>
+    /// Represents an icon source that uses a Fluent System Icon as its content.
+    /// </summary>
+    public class FluentIconSource : PathIconSource
     {
+        public FluentIconSource() { }
+
+        /// <summary>
+        /// Constructs an icon source that uses Fluent System Icon as its content.
+        /// </summary>
+        public FluentIconSource(FluentSymbol symbol)
+        {
+            Symbol = symbol;
+        }
+
         /// <summary>
         /// Gets or sets the Fluent System Icons glyph used as the icon content.
         /// </summary>
@@ -29,7 +41,7 @@ namespace Fluent.Icons
             if (d is FluentIconSource self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
                 // Set internal Image to the SvgImageSource from the look-up table
-                self.Data = GetPathData((FluentSymbol)e.NewValue);
+                self.Data = FluentSymbolIcon.GetPathData((FluentSymbol)e.NewValue);
             }
         }
     }

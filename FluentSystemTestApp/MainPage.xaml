@@ -67,13 +67,15 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button Grid.Column="1" Style="{ThemeResource ButtonRevealStyle}"
+            <StackPanel x:Name="ButtonPanel" Spacing="10" Grid.Column="1">
+                <Button Style="{ThemeResource ButtonRevealStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel Spacing="5" Orientation="Horizontal">
-                    <fluent:FluentSymbolIcon Symbol="FolderAdd"/>
-                    <TextBlock Text="New folder" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
+                    <StackPanel Spacing="5" Orientation="Horizontal">
+                        <fluent:FluentSymbolIcon Symbol="FolderAdd"/>
+                        <TextBlock Text="New folder" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
         </Grid>
     </NavigationView>
 

@@ -16,6 +16,15 @@ namespace Fluent.Icons
         }
 
         /// <summary>
+        /// Constructs a <see cref="FluentSymbolIcon"/> with the specified symbol.
+        /// </summary>
+        public FluentSymbolIcon(FluentSymbol symbol)
+        {
+            this.DefaultStyleKey = typeof(FluentSymbolIcon);
+            Symbol = symbol;
+        }
+
+        /// <summary>
         /// Gets or sets the Fluent System Icons glyph used as the icon content.
         /// </summary>
         public FluentSymbol Symbol

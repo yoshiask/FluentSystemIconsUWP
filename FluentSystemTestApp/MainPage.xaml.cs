@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Fluent.Icons;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,6 +26,17 @@ namespace FluentSystemTestApp
         public MainPage()
         {
             this.InitializeComponent();
+
+            ButtonPanel.Children.Add(
+                new FluentSymbolIcon(FluentSymbol.Icons)
+            );
+            ButtonPanel.Children.Add(
+                new IconSourceElement()
+                {
+                    IconSource = new FluentIconSource(FluentSymbol.AppFolder),
+                    HorizontalAlignment = HorizontalAlignment.Center
+                }
+            );
         }
     }
 }

@@ -145,7 +145,7 @@ namespace FluentIconGenerator
                 .WithTrailingTrivia(SF.CarriageReturnLineFeed, SF.Whitespace("        "))
             )));
             iconsClass = iconsClass.AddMembers(allFluentIconsProp);
-            iconsClass = iconsClass.AddMembers(fluentSymbolEnum);
+            ns = ns.AddMembers(fluentSymbolEnum);
             ns = ns.AddMembers(iconsClass);
             cu = cu.AddMembers(ns);
 
