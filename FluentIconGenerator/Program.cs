@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -9,12 +7,7 @@ using SF = Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
-using System.Text;
-using Svg;
-using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.MSBuild;
-using System.Reflection;
-using Microsoft.CodeAnalysis.Options;
 
 namespace FluentIconGenerator
 {
@@ -23,17 +16,14 @@ namespace FluentIconGenerator
         static void Main(string[] args)
         {
             // Define the path to the Fluent UI System icon pack
-            string dir = @"C:\Users\jjask\Pictures\Icons\SVG\fluentui-system-icons\assets";
-            string outputProj = @"C:\Users\jjask\source\repos\FluentSystemIcons\Microsoft.Design.Fluent";
+            string dir = args[0] ?? @"C:\Users\jjask\Pictures\Icons\SVG\fluentui-system-icons\assets";
+            string outputProj = args[1] ?? @"C:\Users\jjask\source\repos\FluentSystemIcons\Microsoft.Design.Fluent";
             string outputFile = Path.Combine(outputProj, "FluentSymbolIcon.g.cs");
             Regex svgReg = new Regex(@"ic_fluent_(\w+)_24_(regular|filled).svg");
 
             #region Code generation setup
             CompilationUnitSyntax cu = SF.CompilationUnit()
-                .AddUsings(SF.UsingDirective(SF.IdentifierName("System")))
                 .AddUsings(SF.UsingDirective(SF.IdentifierName("System.Collections.Generic")))
-                .AddUsings(SF.UsingDirective(SF.IdentifierName("Windows.UI.Xaml.Controls")))
-                .AddUsings(SF.UsingDirective(SF.IdentifierName("Windows.UI.Xaml.Media.Imaging")))
             ;
 
             NamespaceDeclarationSyntax ns = SF.NamespaceDeclaration(SF.IdentifierName("Microsoft.Design.Fluent"));
@@ -102,12 +92,6 @@ namespace FluentIconGenerator
                 }
                 #endregion
 
-                // Copy the SVG file to the Assets folder in the library project
-                //File.Copy(
-                //    path, Path.Combine(outputProj, "Assets", "Icons", name + ".svg"),
-                //    true
-                //);
-
                 // Generate the C# source code
                 // TODO: Switch to .NET source generators
                 fluentSymbolEnum = fluentSymbolEnum.AddMembers(SF.EnumMemberDeclaration(name));
@@ -162,15 +146,6 @@ namespace FluentIconGenerator
                 {
                     formattedNode.WriteTo(writer);
                 }
-
-                //var task = workspace.OpenSolutionAsync(@"C:\Users\jjask\source\repos\FluentSystemIcons\FluentSystemIcons.sln");
-                //task.Wait();
-                //var sln = task.Result;
-                //Project proj = sln.AddProject("Microsoft.Design.Fluent", "Microsoft.Design.Fluent", cu.Language);
-                //var doc = proj.AddDocument("Icons.cs", formattedNode);
-                //proj = doc.Project;
-                //sln = proj.Solution;
-                //workspace.TryApplyChanges(sln);
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
