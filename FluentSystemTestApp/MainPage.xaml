@@ -13,34 +13,36 @@
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Navigate">
                 <NavigationViewItem.Icon>
-                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(497)}"/>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Directions"/>
+                    </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Discover">
                 <NavigationViewItem.Icon>
-                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(1089)}"/>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Pin"/>
+                    </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Explore">
                 <NavigationViewItem.Icon>
-                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(770)}"/>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Home"/>
+                    </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Favorites">
                 <NavigationViewItem.Icon>
-                    <PathIcon Data="{x:Bind fluent:FluentSymbolIcon.GetPathData(661)}"/>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Favorites"/>
+                    </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.MenuItems>
 
-        <ListView ItemsSource="{x:Bind fluent:FluentSymbolIcon.AllFluentIcons.Values}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="x:String">
-                    <ListViewItem>
-                        <PathIcon Data="{x:Bind}"/>
-                    </ListViewItem>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Button Style="{ThemeResource ButtonRevealStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <fluent:FluentSymbolIcon Symbol="AddCircle"/>
+        </Button>
     </NavigationView>
 </Page>
