@@ -5,10 +5,17 @@
     xmlns:local="using:FluentSystemTestApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:fluent="using:Microsoft.Design.Fluent"
+    xmlns:fluent="using:Fluent.Icons"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
+              BackgroundSource="HostBackdrop"  TintColor="{ThemeResource SystemColorBackgroundColor}" TintOpacity=".6"/>
+        <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
+              BackgroundSource="HostBackdrop"  TintColor="{ThemeResource SystemColorBackgroundColor}" TintOpacity=".6"/>
+    </Page.Resources>
+    
     <NavigationView>
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Navigate">
@@ -41,8 +48,82 @@
             </NavigationViewItem>
         </NavigationView.MenuItems>
 
-        <Button Style="{ThemeResource ButtonRevealStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <fluent:FluentSymbolIcon Symbol="AddCircle"/>
-        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ListView ItemsSource="{x:Bind fluent:FluentSymbolIcon.AllFluentIcons}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ListViewItem>
+                            <StackPanel Spacing="10" Orientation="Horizontal">
+                                <PathIcon Data="{Binding Path=Value}" />
+                                <TextBlock Text="{Binding Path=Key}"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Grid.Column="1" Style="{ThemeResource ButtonRevealStyle}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Spacing="5" Orientation="Horizontal">
+                    <fluent:FluentSymbolIcon Symbol="FolderAdd"/>
+                    <TextBlock Text="New folder" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
     </NavigationView>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="Add">
+                <AppBarButton.Icon>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Add"/>
+                    </IconSourceElement>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Edit">
+                <AppBarButton.Icon>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Edit"/>
+                    </IconSourceElement>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Share">
+                <AppBarButton.Icon>
+                    <IconSourceElement>
+                        <fluent:FluentIconSource Symbol="Share"/>
+                    </IconSourceElement>
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Add">
+                    <AppBarButton.Icon>
+                        <IconSourceElement>
+                            <fluent:FluentIconSource Symbol="AddFilled"/>
+                        </IconSourceElement>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="Edit">
+                    <AppBarButton.Icon>
+                        <IconSourceElement>
+                            <fluent:FluentIconSource Symbol="EditFilled"/>
+                        </IconSourceElement>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="Share">
+                    <AppBarButton.Icon>
+                        <IconSourceElement>
+                            <fluent:FluentIconSource Symbol="ShareFilled"/>
+                        </IconSourceElement>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

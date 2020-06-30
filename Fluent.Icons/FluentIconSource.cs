@@ -4,6 +4,8 @@ using static Fluent.Icons.FluentSymbolIcon;
 
 namespace Fluent.Icons
 {
+    // NOTE: It appears that the only thing preventing this library from
+    // having a minimum Win10 version of 16299 is PathIconSource.
     public partial class FluentIconSource : PathIconSource
     {
         /// <summary>
