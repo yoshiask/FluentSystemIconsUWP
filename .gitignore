@@ -4,6 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 Assets/Icons/*.svg
+*.launchSettings
 
 # User-specific files
 *.rsuser
@@ -1991,3 +1992,4 @@ healthchecksdb
 /Microsoft.Design.Fluent/Assets/Icons/AccessTime.svg
 /Microsoft.Design.Fluent/Assets/Icons/AccessibilityFilled.svg
 /Microsoft.Design.Fluent/Assets/Icons/Accessibility.svg
+/FluentIconGenerator/Properties/launchSettings.json

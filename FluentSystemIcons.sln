@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentIconGenerator", "FluentIconGenerator\FluentIconGenerator.csproj", "{4706353B-1A04-4518-9153-E6A0AB6FF5CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentIconGenerator", "FluentIconGenerator\FluentIconGenerator.csproj", "{4706353B-1A04-4518-9153-E6A0AB6FF5CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Design.Fluent", "Microsoft.Design.Fluent\Microsoft.Design.Fluent.csproj", "{D7C72CCD-6071-4712-82FF-06ABFE87F239}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluent.Icons", "FLuent.Icons\Fluent.Icons.csproj", "{D7C72CCD-6071-4712-82FF-06ABFE87F239}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSystemTestApp", "FluentSystemTestApp\FluentSystemTestApp.csproj", "{81DB44ED-1BD3-4F04-88A1-62A8EEBD64BA}"
 EndProject

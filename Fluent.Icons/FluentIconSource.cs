@@ -1,12 +1,14 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using static Microsoft.Design.Fluent.FluentSymbolIcon;
+using static Fluent.Icons.FluentSymbolIcon;
 
-namespace Microsoft.Design.Fluent
+namespace Fluent.Icons
 {
     public partial class FluentIconSource : PathIconSource
     {
+        /// <summary>
+        /// Gets or sets the Fluent System Icons glyph used as the icon content.
+        /// </summary>
         public FluentSymbol Symbol
         {
             get { return (FluentSymbol)GetValue(SymbolProperty); }
@@ -28,32 +30,5 @@ namespace Microsoft.Design.Fluent
                 self.Data = GetPathData((FluentSymbol)e.NewValue);
             }
         }
-
-        public static PathIcon GetPathIcon(FluentSymbol symbol)
-        {
-            return new PathIcon
-            {
-                Data = (Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), GetPathData(symbol)),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-        }
-
-        public static Geometry GetPathData(int symbol)
-        {
-            return GetPathData((FluentSymbol)symbol);
-        }
-        public static Geometry GetPathData(FluentSymbol symbol)
-        {
-            if (AllFluentIcons.TryGetValue(symbol, out string pathData))
-            {
-                return (Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), pathData);
-            }
-            else
-            {
-                return null;
-            }
-        }
-
     }
 }

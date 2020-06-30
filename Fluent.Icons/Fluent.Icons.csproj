@@ -7,8 +7,8 @@
     <ProjectGuid>{D7C72CCD-6071-4712-82FF-06ABFE87F239}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Design.Fluent</RootNamespace>
-    <AssemblyName>Microsoft.Design.Fluent</AssemblyName>
+    <RootNamespace>Fluent.Icons</RootNamespace>
+    <AssemblyName>Fluent.Icons</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>

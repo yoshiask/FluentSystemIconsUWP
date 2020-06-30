@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Media;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
-namespace Microsoft.Design.Fluent
+namespace Fluent.Icons
 {
     public partial class FluentSymbolIcon : Control
     {
@@ -15,6 +15,9 @@ namespace Microsoft.Design.Fluent
             this.DefaultStyleKey = typeof(FluentSymbolIcon);
         }
 
+        /// <summary>
+        /// Gets or sets the Fluent System Icons glyph used as the icon content.
+        /// </summary>
         public FluentSymbol Symbol
         {
             get { return (FluentSymbol)GetValue(SymbolProperty); }
@@ -50,6 +53,9 @@ namespace Microsoft.Design.Fluent
             }
         }
 
+        /// <summary>
+        /// Returns a new <see cref="PathIcon"/> using the path associated with the provided <see cref="FluentSymbol"/>.
+        /// </summary>
         public static PathIcon GetPathIcon(FluentSymbol symbol)
         {
             return new PathIcon {
@@ -58,11 +64,19 @@ namespace Microsoft.Design.Fluent
                 VerticalAlignment = VerticalAlignment.Center
             };
         }
-        
+
+        /// <summary>
+        /// Returns a new <see cref="Geometry"/> using the path associated with the provided <see cref="int"/>.
+        /// The <paramref name="symbol"/> parameter is cast to <see cref="FluentSymbol"/>.
+        /// </summary>
         public static Geometry GetPathData(int symbol)
         {
             return GetPathData((FluentSymbol)symbol);
         }
+
+        /// <summary>
+        /// Returns a new <see cref="Geometry"/> using the path associated with the provided <see cref="int"/>.
+        /// </summary>
         public static Geometry GetPathData(FluentSymbol symbol)
         {
             if (AllFluentIcons.TryGetValue(symbol, out string pathData))
@@ -74,6 +88,5 @@ namespace Microsoft.Design.Fluent
                 return null;
             }
         }
-        
     }
 }
