@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Fluent.Icons")]
-[assembly: AssemblyDescription("An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons")]
+[assembly: AssemblyDescription("An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons.\r\nRequires UAP >= 10.0.16299.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Joshua Askharoun")]
 [assembly: AssemblyProduct("Fluent.Icons")]
