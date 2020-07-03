@@ -7,7 +7,14 @@ At the moment, there is no NuGet package available. For now, you'll have to clon
 1. Add a reference to `Fluent.Icons.csproj`. You don't need the other two projects to build it.
 2. Add `xmlns:fluent="using:Fluent.Icons"` to your pages.
 
-<!--In your app project, install the [`Fluent.Icons` NuGet package](https://nuget.org/packages/Fluent.Icons). (Note that it is currently a prerelease build, so if you are searching for it in the NuGet Package Manager, make sure you have "Include prerelease" checked.)-->
+## From NuGet
+In your app project, install the [`Fluent.Icons` NuGet package](https://nuget.org/packages/Fluent.Icons). (Note that it is currently a prerelease build, so if you are searching for it in the NuGet Package Manager, make sure you have "Include prerelease" checked.)
+### Build a package
+1. Build the solution in `Release` mode and `Any CPU`
+2. Open Command Prompt in the solution directory and run `nuget pack Fluent.Icons/Fluent.Icons.csproj -properties Configuration=Release`
+3. Go to the Package Manager Console and set the default project to FluentSystemTestApp. Then run `Install-Package "{repo_path}\FluentSystemIconsUWP\Fluent.Icons.{version}.nupkg"` (change `{repo_path}` to where the solution folder is and `{version}` to the package version).
+4. Test the package by deploying FluentSystemTestApp.proj
+
 
 # Examples
 
