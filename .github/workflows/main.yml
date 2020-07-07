@@ -67,8 +67,6 @@ jobs:
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.commitsSinceVersionSource }}"
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
-    
-    - run: echo 'NuGetPackageVersion ${{ steps.nbgv.outputs.AssemblyFileVersion }}'
 
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
