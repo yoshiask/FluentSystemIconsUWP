@@ -1,0 +1,68 @@
+# This is a basic workflow to help you get started with Actions
+
+name: FluentSystemIcons.CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: 
+    - release/*
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    
+    env:
+      USER_NAME: yoshiask
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 
+
+   # Use Nerdbank.GitVersioning to set version variables: https://github.com/AArnott/nbgv
+    - name: Use Nerdbank.GitVersioning to set version variables
+      uses: dotnet/nbgv@master
+      id: nbgv
+      with:
+        setAllVars: true
+    
+    - run: echo 'NuGetPackageVersion ${{ steps.nbgv.outputs.AssemblyFileVersion }}'
+
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+
+    - name: MSBuild Restore
+      run: msbuild Fluent.Icons\Fluent.Icons.csproj /p:Configuration="Release" /t:restore     
+
+    - name: MSBuild Build
+      run: msbuild Fluent.Icons\Fluent.Icons.csproj /p:Configuration="Release"
+      
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+      
+    - name: Nuget Pack
+      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release;version="${{ steps.nbgv.outputs.AssemblyFileVersion }}"
+        
+    - name: Nuget SetAPIKey
+      run: nuget setApiKey ${{ secrets.NUGET_KEY }}
+      continue-on-error: true
+
+    - name: Nuget Push
+      run: nuget push *.nupkg -Source https://api.nuget.org/v3/index.json
+      continue-on-error: true
+
+    - name: GH Nuget Add Source
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/${{ env.USER_NAME }}/index.json" -UserName ${{ env.USER_NAME }} -Password ${{ secrets.GITHUB_TOKEN  }}
+      
+    - name: GH Nuget SetAPIKey
+      run: nuget setApiKey ${{ secrets.GITHUB_TOKEN  }} -Source "GitHub"      
+    
+    - name: GH Nuget Push
+      run: nuget push *.nupkg -Source "GitHub"
