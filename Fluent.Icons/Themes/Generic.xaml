@@ -10,7 +10,14 @@
                     <PathIcon x:Name="IconDisplay"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              Foreground="{TemplateBinding Foreground}"/>
+                              Foreground="{TemplateBinding Foreground}"
+                              Width="{TemplateBinding Width}"
+                              Height="{TemplateBinding Height}"
+                              MaxWidth="{TemplateBinding MaxWidth}"
+                              MaxHeight="{TemplateBinding MaxHeight}"
+                              MinWidth="{TemplateBinding MinWidth}"
+                              MinHeight="{TemplateBinding MinHeight}"
+                              Margin="{TemplateBinding Margin}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
