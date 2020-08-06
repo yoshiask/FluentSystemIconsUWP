@@ -81,8 +81,7 @@ jobs:
       uses: warrenbuckley/Setup-Nuget@v1
       
     - name: Nuget Pack
-      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release;version="${{ steps.gitversion.outputs.assemblySemFileVer }}"
-        
+      run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release -Version ${{ steps.gitversion.outputs.assemblySemFileVer }}        
     - name: Nuget SetAPIKey
       run: nuget setApiKey ${{ secrets.NUGET_KEY }}
       continue-on-error: true
