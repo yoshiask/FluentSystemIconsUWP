@@ -26,6 +26,9 @@ namespace FluentIconGenerator
 
 namespace Fluent.Icons
 {
+    /// <summary>
+    /// An enum listing all available Fluent System Icon symbols
+    /// </summary>
     public enum FluentSymbol {
 [{FluentSymbolEnum}]
     }
@@ -34,6 +37,9 @@ namespace Fluent.Icons
     // FluentIconGenerator is run.
     public partial class FluentSymbolIcon
     {
+        /// <summary>
+        /// A lookup table containing the paths representing each available Fluent System Icon symbol
+        /// </summary>
         public static Dictionary<FluentSymbol, string> AllFluentIcons { get; } = new Dictionary<FluentSymbol, string>
         {
 [{AllFluentIconsDict}]
