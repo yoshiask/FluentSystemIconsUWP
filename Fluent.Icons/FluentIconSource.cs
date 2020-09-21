@@ -3,8 +3,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Fluent.Icons
 {
-    // NOTE: It appears that the only thing preventing this library from
-    // having a minimum Win10 version of 16299 is PathIconSource.
     /// <summary>
     /// Represents an icon source that uses a Fluent System Icon as its content.
     /// </summary>
