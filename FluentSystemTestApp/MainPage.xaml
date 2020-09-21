@@ -21,28 +21,28 @@
             <NavigationViewItem Content="Navigate">
                 <NavigationViewItem.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Directions"/>
+                        <fluent:FluentIconSource Symbol="Directions24"/>
                     </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Discover">
                 <NavigationViewItem.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Pin"/>
+                        <fluent:FluentIconSource Symbol="Pin24"/>
                     </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Explore">
                 <NavigationViewItem.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Home"/>
+                        <fluent:FluentIconSource Symbol="Home24"/>
                     </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Favorites">
                 <NavigationViewItem.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Favorites"/>
+                        <fluent:FluentIconSource Symbol="Favorites24"/>
                     </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
@@ -71,7 +71,7 @@
                 <Button Style="{ThemeResource ButtonRevealStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel Spacing="5" Orientation="Horizontal">
-                        <fluent:FluentSymbolIcon Symbol="FolderAdd"/>
+                        <fluent:FluentSymbolIcon Symbol="FolderAdd24"/>
                         <TextBlock Text="New folder" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -84,21 +84,21 @@
             <AppBarButton Label="Add">
                 <AppBarButton.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Add"/>
+                        <fluent:FluentIconSource Symbol="Add24"/>
                     </IconSourceElement>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Edit">
                 <AppBarButton.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Edit"/>
+                        <fluent:FluentIconSource Symbol="Edit24"/>
                     </IconSourceElement>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Share">
                 <AppBarButton.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Share"/>
+                        <fluent:FluentIconSource Symbol="Share24"/>
                     </IconSourceElement>
                 </AppBarButton.Icon>
             </AppBarButton>
@@ -107,21 +107,21 @@
                 <AppBarButton Label="Add">
                     <AppBarButton.Icon>
                         <IconSourceElement>
-                            <fluent:FluentIconSource Symbol="AddFilled"/>
+                            <fluent:FluentIconSource Symbol="Add24Filled"/>
                         </IconSourceElement>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="Edit">
                     <AppBarButton.Icon>
                         <IconSourceElement>
-                            <fluent:FluentIconSource Symbol="EditFilled"/>
+                            <fluent:FluentIconSource Symbol="Edit24Filled"/>
                         </IconSourceElement>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="Share">
                     <AppBarButton.Icon>
                         <IconSourceElement>
-                            <fluent:FluentIconSource Symbol="ShareFilled"/>
+                            <fluent:FluentIconSource Symbol="Share24Filled"/>
                         </IconSourceElement>
                     </AppBarButton.Icon>
                 </AppBarButton>

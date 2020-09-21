@@ -28,12 +28,12 @@ namespace FluentSystemTestApp
             this.InitializeComponent();
 
             ButtonPanel.Children.Add(
-                new FluentSymbolIcon(FluentSymbol.Icons)
+                new FluentSymbolIcon(FluentSymbol.Icons24)
             );
             ButtonPanel.Children.Add(
                 new IconSourceElement()
                 {
-                    IconSource = new FluentIconSource(FluentSymbol.AppFolder),
+                    IconSource = new FluentIconSource(FluentSymbol.AppFolder24),
                     HorizontalAlignment = HorizontalAlignment.Center
                 }
             );
