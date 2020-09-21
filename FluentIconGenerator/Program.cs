@@ -19,7 +19,7 @@ namespace FluentIconGenerator
                 : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                   "source", "repos", "FluentSystemIcons", "Fluent.Icons");
             string outputFile = Path.Combine(outputProj, "FluentSymbolIcon.g.cs");
-            Regex svgReg = new Regex(@"ic_fluent_(\w+)_24_(regular|filled).svg");
+            Regex svgReg = new Regex(@"ic_fluent_(?<name>\w+)_(?<size>\d+)_(?<type>regular|filled).svg");
 
             #region Source builder setup
             var sourceBuilder = new StringBuilder(@"using System.Collections.Generic;
@@ -59,8 +59,8 @@ namespace Fluent.Icons
                 // Extrapolate the symbol name from the file path
                 string file = path.Substring(dir.Length + 1); // Also remove the slash
                 Console.WriteLine(file);
-                bool isFilled = match.Groups[2].Value == "filled";
-                string name = file.Split('\\')[0].Replace(" ", "") + (isFilled ? "Filled" : "");
+                bool isFilled = match.Groups["type"].Value == "filled";
+                string name = file.Split('\\')[0].Replace(" ", "") + match.Groups["size"].ToString() + (isFilled ? "Filled" : "");
 
                 #region SVG reading
                 // Load the path data into a string
