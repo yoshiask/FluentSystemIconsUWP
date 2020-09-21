@@ -150,15 +150,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Fluent.Icons">
+      <Version>1.1.59</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FLuent.Icons\Fluent.Icons.csproj">
-      <Project>{d7c72ccd-6071-4712-82ff-06abfe87f239}</Project>
-      <Name>Fluent.Icons</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
