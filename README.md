@@ -32,11 +32,11 @@ using Fluent.Icons;
 Use a Fluent Icon as a button's content.
 ```xml
 <Button>
-    <fluent:FluentSymbolIcon Symbol="AddCircle"/>
+    <fluent:FluentSymbolIcon Symbol="AddCircle24"/>
 </Button>
 ```
 ```cs
-myButton.Content = new FluentSymbolIcon(FluentSymbol.AddCircle);
+myButton.Content = new FluentSymbolIcon(FluentSymbol.AddCircle24);
 ```
 
 ## Example B
@@ -45,9 +45,7 @@ Use Fluent Icons in a NavigationView's MenuItems.
 <NavigationView.MenuItems>
     <NavigationViewItem Content="Navigate">
         <NavigationViewItem.Icon>
-            <IconSourceElement>
-                <FluentIconSource Symbol="Directions" />
-            </IconSourceElement>
+            <FluentIconElement Symbol="Directions24" />
         </NavigationViewItem.Icon>
     </NavigationViewItem>
 </NavigationView.MenuItems>
@@ -55,10 +53,7 @@ Use Fluent Icons in a NavigationView's MenuItems.
 ```cs
 myNavView.MenuItems.Add(new NavigationViewItem()
 {
-    Icon = new IconSourceElement()
-    {
-        IconSource = new FluentIconSource(FluentSymbol.Directions)
-    }
+    Icon = new FluentIconElement(FluentSymbol.Directions24);
 });
 ```
 
@@ -67,27 +62,25 @@ Use a Fluent Icon in an AppBarButton.
 ```xml
 <AppBarButton>
     <AppBarButton.Icon>
-        <IconSourceElement>
-            <FluentIconSource Symbol="Favorites" />
-        </IconSourceElement>
+        <FluentIconElement Symbol="Star24" />
     </AppBarButton.Icon>
 </AppBarButton>
 ```
 ```cs
-myAppBarButton.Icon = new IconSourceElement()
-{
-    IconSource = new FluentIconSource(FluentSymbol.Directions)
-};
+myAppBarButton.Icon = new FluentIconElement(FluentSymbol.Star24);
 ```
 
 ## Example D
 Show a list of all available Fluent Icons.
 ```xml
-<ListView ItemsSource="{x:Bind fluent:FluentSymbolIcon.AllFluentIcons.Values}">
+<ListView ItemsSource="{x:Bind fluent:FluentSymbolIcon.AllFluentIcons.Keys}">
     <ListView.ItemTemplate>
-        <DataTemplate x:DataType="x:String">
+        <DataTemplate x:DataType="fluent:FluentSymbol">
             <ListViewItem>
-                <PathIcon Data="{x:Bind}" />
+                <StackPanel Spacing="10" Orientation="Horizontal">
+                    <fluent:FluentSymbolIcon Symbol="{x:Bind}"/>
+                    <TextBlock Text="{x:Bind}"/>
+                </StackPanel>
             </ListViewItem>
         </DataTemplate>
     </ListView.ItemTemplate>
