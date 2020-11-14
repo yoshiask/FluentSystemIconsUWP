@@ -7,12 +7,12 @@
         <authors>Joshua Askharoun</authors>
         <owners>Joshua Askharoun</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <license type="expression">MIT</license>
+        <license type="expression">GPL-3.0-only</license>
         <projectUrl>https://github.com/yoshiask/FluentSystemIconsUWP/</projectUrl>
 				<repository type="git" url="https://github.com/yoshiask/FluentSystemIconsUWP.git" />
 				<icon>Logo.png</icon>
         <description>An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons. Requires UAP >= 10.0.15063.</description>
-        <releaseNotes>Updates library to sync with FSI 1.1.84</releaseNotes>
+        <releaseNotes>Added FluentIconElement and updated library to sync with FSI 1.1.84</releaseNotes>
         <copyright>Copyright 2020</copyright>
         <tags>UWP Fluent Design UI Microsoft Fabric Icons</tags>
 
