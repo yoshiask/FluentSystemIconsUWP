@@ -1,23 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
 namespace Fluent.Icons
 {
+    /// <summary>
+    /// Represents an icon that uses a <see cref="FluentIconSource"/> as its content.
+    /// </summary>
     public sealed class FluentIconElement : IconSourceElement
     {
+        /// <summary>
+        /// Constructs an empty <see cref="FluentIconElement"/>.
+        /// </summary>
         public FluentIconElement()
         {
             IconSource = new FluentIconSource();
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="FluentIconElement"/> displaying the specified symbol.
+        /// </summary>
+        /// <param name="symbol"></param>
+        public FluentIconElement(FluentSymbol symbol)
+        {
+            IconSource = new FluentIconSource(symbol);
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="FluentIconElement"/> with the specified source.
+        /// </summary>
+        public FluentIconElement(FluentIconSource source)
+        {
+            IconSource = source;
         }
 
         /// <summary>
@@ -30,6 +45,9 @@ namespace Fluent.Icons
         }
 
         // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Identifies the <see cref="Symbol"/> property.
+        /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
             "Symbol",
             typeof(FluentSymbol), typeof(FluentIconSource),

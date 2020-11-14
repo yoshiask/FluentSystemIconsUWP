@@ -11,7 +11,7 @@ namespace Fluent.Icons
         public FluentIconSource() { }
 
         /// <summary>
-        /// Constructs an icon source that uses Fluent System Icon as its content.
+        /// Constructs an <see cref="IconSource"/> that uses a Fluent System Icon as its content.
         /// </summary>
         public FluentIconSource(FluentSymbol symbol)
         {
@@ -28,6 +28,9 @@ namespace Fluent.Icons
         }
 
         // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Identifies the <see cref="Symbol"/> property.
+        /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
             "Symbol",
             typeof(FluentSymbol), typeof(FluentIconSource),
