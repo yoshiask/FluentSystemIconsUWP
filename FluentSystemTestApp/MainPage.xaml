@@ -10,40 +10,30 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
-              BackgroundSource="HostBackdrop"  TintColor="{ThemeResource SystemColorBackgroundColor}" TintOpacity=".6"/>
-        <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
-              BackgroundSource="HostBackdrop"  TintColor="{ThemeResource SystemColorBackgroundColor}" TintOpacity=".6"/>
+        <StaticResource x:Key="NavigationViewDefaultPaneBackground" ResourceKey="SystemControlAcrylicWindowBrush"/>
+        <StaticResource x:Key="NavigationViewExpandedPaneBackground" ResourceKey="SystemControlAcrylicWindowBrush"/>
     </Page.Resources>
     
     <NavigationView>
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Navigate">
                 <NavigationViewItem.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Directions24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Directions24"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Discover">
                 <NavigationViewItem.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Pin24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Pin24"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Explore">
                 <NavigationViewItem.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Home24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Home24"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Favorites">
                 <NavigationViewItem.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Star24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Star24"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.MenuItems>
@@ -83,46 +73,34 @@
         <CommandBar>
             <AppBarButton Label="Add">
                 <AppBarButton.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Add24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Add24"/>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Edit">
                 <AppBarButton.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Edit24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Edit24"/>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Share">
                 <AppBarButton.Icon>
-                    <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Share24"/>
-                    </IconSourceElement>
+                    <fluent:FluentIconElement Symbol="Share24"/>
                 </AppBarButton.Icon>
             </AppBarButton>
 
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Add">
                     <AppBarButton.Icon>
-                        <IconSourceElement>
-                            <fluent:FluentIconSource Symbol="Add24Filled"/>
-                        </IconSourceElement>
+                        <fluent:FluentIconElement Symbol="Add24Filled"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="Edit">
                     <AppBarButton.Icon>
-                        <IconSourceElement>
-                            <fluent:FluentIconSource Symbol="Edit24Filled"/>
-                        </IconSourceElement>
+                        <fluent:FluentIconElement Symbol="Edit24Filled"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="Share">
                     <AppBarButton.Icon>
-                        <IconSourceElement>
-                            <fluent:FluentIconSource Symbol="Share24Filled"/>
-                        </IconSourceElement>
+                        <fluent:FluentIconElement Symbol="Share24Filled"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>

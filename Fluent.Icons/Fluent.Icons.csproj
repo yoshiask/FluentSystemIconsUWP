@@ -122,6 +122,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FluentIconElement.cs" />
     <Compile Include="FluentIconSource.cs" />
     <Compile Include="FluentSymbolIcon.cs" />
     <Compile Include="FluentSymbolIcon.g.cs" />
