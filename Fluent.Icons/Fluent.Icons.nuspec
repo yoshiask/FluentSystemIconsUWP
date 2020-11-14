@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>Fluent.Icons</id>
-        <version>1.1.59.0</version>
+        <version>1.1.84.0</version>
         <title>Fluent.Icons</title>
         <authors>Joshua Askharoun</authors>
         <owners>Joshua Askharoun</owners>
@@ -12,7 +12,7 @@
 				<repository type="git" url="https://github.com/yoshiask/FluentSystemIconsUWP.git" />
 				<icon>Logo.png</icon>
         <description>An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons. Requires UAP >= 10.0.15063.</description>
-        <releaseNotes>Adds all icons, not just icons that have a 24px size.</releaseNotes>
+        <releaseNotes>Updates library to sync with FSI 1.1.84</releaseNotes>
         <copyright>Copyright 2020</copyright>
         <tags>UWP Fluent Design UI Microsoft Fabric Icons</tags>
 

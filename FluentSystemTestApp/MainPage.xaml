@@ -42,7 +42,7 @@
             <NavigationViewItem Content="Favorites">
                 <NavigationViewItem.Icon>
                     <IconSourceElement>
-                        <fluent:FluentIconSource Symbol="Favorites24"/>
+                        <fluent:FluentIconSource Symbol="Star24"/>
                     </IconSourceElement>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
