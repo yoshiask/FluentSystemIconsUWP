@@ -18,6 +18,7 @@ jobs:
     
     env:
       USER_NAME: yoshiask
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,13 +29,13 @@ jobs:
       run: git fetch --prune --unshallow
 
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.2
+      uses: gittools/actions/gitversion/setup@v0.9.7
       with:
-          versionSpec: '5.2.x'
+          versionSpec: '5.5.x'
 
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0.9.2
+      uses: gittools/actions/gitversion/execute@v0.9.7
       
     - run: |
         echo "Major: ${{ steps.gitversion.outputs.major }}"
@@ -78,7 +79,7 @@ jobs:
       run: msbuild Fluent.Icons\Fluent.Icons.csproj /p:Configuration="Release"
       
     - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+      uses: nuget/setup-nuget@v1
       
     - name: Nuget Pack
       run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release -Version ${{ steps.gitversion.outputs.assemblySemFileVer }}        
