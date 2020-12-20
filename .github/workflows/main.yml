@@ -18,6 +18,7 @@ jobs:
     
     env:
       USER_NAME: yoshiask
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
