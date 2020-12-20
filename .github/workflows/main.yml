@@ -79,7 +79,7 @@ jobs:
       run: msbuild Fluent.Icons\Fluent.Icons.csproj /p:Configuration="Release"
       
     - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+      uses: nuget/setup-nuget@v1
       
     - name: Nuget Pack
       run: nuget pack Fluent.Icons\Fluent.Icons.csproj -properties Configuration=Release -Version ${{ steps.gitversion.outputs.assemblySemFileVer }}        
