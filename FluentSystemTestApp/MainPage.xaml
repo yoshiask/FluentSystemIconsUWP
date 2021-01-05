@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fluent="using:Fluent.Icons"
+    xmlns:fluentExt="using:Fluent.Icons.Extensions.Markup"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -16,11 +17,7 @@
     
     <NavigationView>
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Navigate">
-                <NavigationViewItem.Icon>
-                    <fluent:FluentIconElement Symbol="Directions24"/>
-                </NavigationViewItem.Icon>
-            </NavigationViewItem>
+            <!--<NavigationViewItem Content="Navigate" Icon="{fluentExt:SymbolIcon Symbol=Directions24}"/>-->
             <NavigationViewItem Content="Discover">
                 <NavigationViewItem.Icon>
                     <fluent:FluentIconElement Symbol="Pin24"/>
