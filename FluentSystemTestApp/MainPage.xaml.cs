@@ -1,6 +1,8 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Fluent.Icons;
+using System.Collections.ObjectModel;
+using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -11,19 +13,26 @@ namespace FluentSystemTestApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<FluentSymbol> Symbols = new ObservableCollection<FluentSymbol>();
+
         public MainPage()
         {
             this.InitializeComponent();
 
             ButtonPanel.Children.Add(
-                new FluentSymbolIcon(FluentSymbol.Icons24)
+                new FluentSymbolIcon(FluentSymbol.Icons)
             );
             ButtonPanel.Children.Add(
-                new FluentIconElement(FluentSymbol.AppFolder24)
+                new FluentIconElement(FluentSymbol.AppFolder)
                 {
                     HorizontalAlignment = HorizontalAlignment.Center
                 }
             );
+
+            foreach (FluentSymbol symbol in Enum.GetValues(typeof(FluentSymbol)))
+            {
+                Symbols.Add(symbol);
+            }
         }
     }
 }

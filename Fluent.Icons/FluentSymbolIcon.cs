@@ -8,11 +8,13 @@ namespace Fluent.Icons
 {
     public partial class FluentSymbolIcon : Control
     {
-        private PathIcon iconDisplay;
+        public static FontFamily FSIFontFamily = new FontFamily("/Assets/FluentUI-System-Icons.ttf#FluentUI-System-Icons");
+
+        private FontIcon iconDisplay;
 
         public FluentSymbolIcon()
         {
-            this.DefaultStyleKey = typeof(FluentSymbolIcon);
+            DefaultStyleKey = typeof(FluentSymbolIcon);
         }
 
         /// <summary>
@@ -20,7 +22,7 @@ namespace Fluent.Icons
         /// </summary>
         public FluentSymbolIcon(FluentSymbol symbol)
         {
-            this.DefaultStyleKey = typeof(FluentSymbolIcon);
+            DefaultStyleKey = typeof(FluentSymbolIcon);
             Symbol = symbol;
         }
 
@@ -40,13 +42,14 @@ namespace Fluent.Icons
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
         );
 
+        /// <inheritdoc/>
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            if (this.GetTemplateChild("IconDisplay") is PathIcon pi)
+            if (GetTemplateChild("IconDisplay") is FontIcon pi)
             {
-                this.iconDisplay = pi;
+                iconDisplay = pi;
                 // Awkward workaround for a weird bug where iconDisplay is null
                 // when OnSymbolChanged fires in a newly created FluentSymbolIcon
                 Symbol = Symbol;
@@ -58,19 +61,18 @@ namespace Fluent.Icons
             if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int) && self.iconDisplay != null)
             {
                 // Set internal Image to the SvgImageSource from the look-up table
-                self.iconDisplay.Data = GetPathData((FluentSymbol)e.NewValue);
+                self.iconDisplay.Glyph = GetGlyph((FluentSymbol)e.NewValue);
             }
         }
 
         /// <summary>
         /// Returns a new <see cref="PathIcon"/> using the path associated with the provided <see cref="FluentSymbol"/>.
         /// </summary>
-        public static PathIcon GetPathIcon(FluentSymbol symbol)
+        public static FontIcon GetFontIcon(FluentSymbol symbol)
         {
-            return new PathIcon {
-                Data = (Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), GetPathData(symbol)),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
+            return new FontIcon {
+                Glyph = GetGlyph(symbol),
+                FontFamily = FSIFontFamily
             };
         }
 
@@ -78,24 +80,17 @@ namespace Fluent.Icons
         /// Returns a new <see cref="Geometry"/> using the path associated with the provided <see cref="int"/>.
         /// The <paramref name="symbol"/> parameter is cast to <see cref="FluentSymbol"/>.
         /// </summary>
-        public static Geometry GetPathData(int symbol)
+        public static string GetGlyph(int symbol)
         {
-            return GetPathData((FluentSymbol)symbol);
+            return GetGlyph((FluentSymbol)symbol);
         }
 
         /// <summary>
         /// Returns a new <see cref="Geometry"/> using the path associated with the provided <see cref="int"/>.
         /// </summary>
-        public static Geometry GetPathData(FluentSymbol symbol)
+        public static string GetGlyph(FluentSymbol symbol)
         {
-            if (AllFluentIcons.TryGetValue(symbol, out string pathData))
-            {
-                return (Geometry)Windows.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(typeof(Geometry), pathData);
-            }
-            else
-            {
-                return null;
-            }
+            return unchecked((char)symbol).ToString();
         }
     }
 }

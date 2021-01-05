@@ -6,15 +6,19 @@ namespace Fluent.Icons
     /// <summary>
     /// Represents an icon source that uses a Fluent System Icon as its content.
     /// </summary>
-    public class FluentIconSource : PathIconSource
+    public class FluentIconSource : FontIconSource
     {
-        public FluentIconSource() { }
+        public FluentIconSource()
+        {
+            FontFamily = FluentSymbolIcon.FSIFontFamily;
+        }
 
         /// <summary>
         /// Constructs an <see cref="IconSource"/> that uses a Fluent System Icon as its content.
         /// </summary>
         public FluentIconSource(FluentSymbol symbol)
         {
+            FontFamily = FluentSymbolIcon.FSIFontFamily;
             Symbol = symbol;
         }
 
@@ -42,7 +46,7 @@ namespace Fluent.Icons
             if (d is FluentIconSource self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
                 // Set internal Image to the SvgImageSource from the look-up table
-                self.Data = FluentSymbolIcon.GetPathData((FluentSymbol)e.NewValue);
+                self.Glyph = FluentSymbolIcon.GetGlyph((FluentSymbol)e.NewValue);
             }
         }
     }

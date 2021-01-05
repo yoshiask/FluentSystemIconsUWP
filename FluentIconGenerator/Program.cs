@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Text;
+using System.Linq;
 
 namespace FluentIconGenerator
 {
@@ -11,15 +12,20 @@ namespace FluentIconGenerator
         static void Main(string[] args)
         {
             // Define the path to the Fluent UI System icon pack
-            
+
             string dir = (args.Length >= 1) ? args[0]
                 : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                   "source", "repos", "fluentui-system-icons", "assets");
             string outputProj = (args.Length >= 2) ? args[1]
                 : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                   "source", "repos", "FluentSystemIcons", "Fluent.Icons");
+            string tempSvgDir = (args.Length >= 3) ? args[2]
+                : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                  "FluentIconGenerator");
             string outputFile = Path.Combine(outputProj, "FluentSymbolIcon.g.cs");
             Regex svgReg = new Regex(@"ic_fluent_(?<name>\w+)_(?<size>\d+)_(?<type>regular|filled).svg");
+
+            Directory.CreateDirectory(tempSvgDir);
 
             #region Source builder setup
             var sourceBuilder = new StringBuilder(@"using System.Collections.Generic;
@@ -34,67 +40,72 @@ namespace Fluent.Icons
     /// An enum listing all available Fluent System Icon symbols
     /// </summary>
     public enum FluentSymbol {
-[{FluentSymbolEnum}]
-    }
-
-    public partial class FluentSymbolIcon
-    {
-        /// <summary>
-        /// A lookup table containing the paths representing each available Fluent System Icon symbol
-        /// </summary>
-        public static Dictionary<FluentSymbol, string> AllFluentIcons { get; } = new Dictionary<FluentSymbol, string>
-        {
-[{AllFluentIconsDict}]
-        };
-    }
-}");
+");
             var FluentSymbolEnumBuilder = new StringBuilder();
-            var AllFluentIconsBuilder = new StringBuilder();
             #endregion
 
-            foreach (string folder in Directory.EnumerateDirectories(dir, @"*", SearchOption.TopDirectoryOnly))
+            int i = 0;
+            var directories = Directory.EnumerateDirectories(dir, @"*", SearchOption.TopDirectoryOnly)
+                .OrderBy(d => d);
+            foreach (string folder in directories)
             {
-                var SVGFolder = Path.Combine(folder, "SVG");
-                foreach (string path in Directory.EnumerateFiles(SVGFolder, @"*", SearchOption.AllDirectories))
+                string displayName = folder.Split('\\').Last();
+                if (displayName == "Flag Pride")
                 {
-                    var match = svgReg.Match(path);
+                    // Multi-color icons don't work in fonts
+                    continue;
+                }
+
+                string filePart = Path.Combine(folder, "SVG", $"ic_fluent_{displayName.ToLower().Replace(' ', '_')}_24");
+                var fileRegular = filePart + "_regular.svg";
+                var fileFilled = filePart + "_filled.svg";
+
+                if (File.Exists(fileRegular))
+                {
+                    var match = svgReg.Match(fileRegular);
                     if (!match.Success)
-                        continue;
-
-                    // Extrapolate the symbol name from the file path
-                    string file = path.Substring(dir.Length + 1); // Also remove the slash
-                    Console.WriteLine(file);
-                    bool isFilled = match.Groups["type"].Value == "filled";
-                    string name = file.Split('\\')[0].Replace(" ", "") + match.Groups["size"].ToString() + (isFilled ? "Filled" : "");
-
-                    #region SVG reading
-                    // Load the path data into a string
-                    var svg = new XmlDocument();
-                    svg.Load(path);
-                    // create ns manager
-                    XmlNamespaceManager xmlnsManager = new XmlNamespaceManager(svg.NameTable);
-                    xmlnsManager.AddNamespace("svg", "http://www.w3.org/2000/svg");
-
-                    // Select all SVG path elements
-                    XmlNodeList list = svg.LastChild.SelectNodes("//svg:path", xmlnsManager);
-                    string xamlPathData = "";
-                    foreach (XmlNode pathElem in list)
                     {
-                        // Appending SVG paths effectively combines them into one
-                        xamlPathData += pathElem.Attributes["d"].Value + " ";
+                        Console.WriteLine("\tSkipping: Not a valid icon\r\n");
+                        continue;
                     }
-                    #endregion
+
+                    string name = displayName.Replace(" ", "");
 
                     // Generate the C# source code
                     // TODO: Switch to .NET source generators
-                    FluentSymbolEnumBuilder.Append($"        {name},\r\n");
-                    AllFluentIconsBuilder.Append($"            {{ FluentSymbol.{name}, \"{xamlPathData}\" }},\r\n");
-                } 
+                    FluentSymbolEnumBuilder.Append($"        {name} = 0x{0xE900 + i:X4},\r\n");
+                    Console.WriteLine($"{name} = 0x{0xE900 + i:X4}");
+                    File.Copy(fileRegular, Path.Combine(tempSvgDir, $"{i:0000}_{name}.svg"), true);
+
+                    i++;
+                }
+
+                if (File.Exists(fileFilled))
+                {
+                    var match = svgReg.Match(fileFilled);
+                    if (!match.Success)
+                    {
+                        Console.WriteLine("\tSkipping: Not a valid icon\r\n");
+                        continue;
+                    }
+
+                    string name = displayName.Replace(" ", "") + "Filled";
+
+                    // Generate the C# source code
+                    // TODO: Switch to .NET source generators
+                    FluentSymbolEnumBuilder.Append($"        {name} = 0x{0xE900 + i:X4},\r\n");
+                    Console.WriteLine($"{name} = 0x{0xE900 + i:X4}\r\n");
+                    File.Copy(fileFilled, Path.Combine(tempSvgDir, $"{i:0000}_{name}.svg"), true);
+
+                    i++;
+                }
             }
 
             // Update the document
-            sourceBuilder.Replace("[{FluentSymbolEnum}]", FluentSymbolEnumBuilder.ToString());
-            sourceBuilder.Replace("[{AllFluentIconsDict}]", AllFluentIconsBuilder.ToString());
+            sourceBuilder.Append(FluentSymbolEnumBuilder.ToString());
+            sourceBuilder.Append(@"
+    }
+}");
 
             // Write the generated code to the output file
             File.WriteAllText(outputFile, sourceBuilder.ToString());

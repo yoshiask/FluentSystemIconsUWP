@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:FluentSymbolIcon">
-                    <PathIcon x:Name="IconDisplay"
+                    <FontIcon x:Name="IconDisplay"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               Foreground="{TemplateBinding Foreground}"
@@ -17,7 +17,8 @@
                               MaxHeight="{TemplateBinding MaxHeight}"
                               MinWidth="{TemplateBinding MinWidth}"
                               MinHeight="{TemplateBinding MinHeight}"
-                              Margin="{TemplateBinding Margin}"/>
+                              Margin="{TemplateBinding Margin}"
+                              FontFamily="/Assets/FluentUI-System-Icons.ttf#FluentUI-System-Icons"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
