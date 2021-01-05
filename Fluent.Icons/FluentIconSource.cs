@@ -31,13 +31,11 @@ namespace Fluent.Icons.Compact
             set { SetValue(SymbolProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
         /// <summary>
         /// Identifies the <see cref="Symbol"/> property.
         /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            "Symbol",
-            typeof(FluentSymbol), typeof(FluentIconSource),
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentIconSource),
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
         );
 

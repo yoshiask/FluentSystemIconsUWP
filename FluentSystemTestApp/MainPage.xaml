@@ -51,7 +51,7 @@
                         <ListViewItem>
                             <StackPanel Spacing="10" Orientation="Horizontal">
                                 <fluent:FluentSymbolIcon Symbol="{x:Bind}"/>
-                                <TextBlock Text="{x:Bind}"/>
+                                <TextBlock Text="{x:Bind}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </ListViewItem>
                     </DataTemplate>
@@ -62,7 +62,7 @@
                 <Button Style="{ThemeResource ButtonRevealStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel Spacing="5" Orientation="Horizontal">
-                        <fluent:FluentSymbolIcon Symbol="FolderAdd"/>
+                        <fluent:FluentSymbolIcon Symbol="FolderAdd" FontSize="64"/>
                         <TextBlock Text="New folder" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
