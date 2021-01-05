@@ -5,7 +5,7 @@
     xmlns:local="using:FluentSystemTestApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:fluent="using:Fluent.Icons"
+    xmlns:fluent="using:Fluent.Icons.Compact"
     xmlns:ext="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

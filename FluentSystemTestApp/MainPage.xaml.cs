@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Fluent.Icons;
+using Fluent.Icons.Compact;
 using System.Collections.ObjectModel;
 using System;
 

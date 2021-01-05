@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Fluent.Icons
+namespace Fluent.Icons.Compact
 {
     /// <summary>
     /// Represents an icon source that uses a Fluent System Icon as its content.

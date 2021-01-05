@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Media;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
-namespace Fluent.Icons
+namespace Fluent.Icons.Compact
 {
     public partial class FluentSymbolIcon : Control
     {
