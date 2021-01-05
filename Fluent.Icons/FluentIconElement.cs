@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
@@ -49,9 +50,25 @@ namespace Fluent.Icons.Compact
         /// Identifies the <see cref="Symbol"/> property.
         /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            "Symbol",
-            typeof(FluentSymbol), typeof(FluentIconSource),
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentIconElement),
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
+        );
+
+        /// <summary>
+        /// Gets or sets the Fluent System Icons glyph used as the icon content.
+        /// </summary>
+        public double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="Symbol"/> property.
+        /// </summary>
+        public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
+            nameof(FontSize), typeof(double), typeof(FluentIconElement),
+            new PropertyMetadata(24, new PropertyChangedCallback(OnFontSizeChanged))
         );
 
         private static void OnSymbolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -62,6 +79,18 @@ namespace Fluent.Icons.Compact
                 {
                     // Set internal source to the new symbol
                     source.Symbol = (FluentSymbol)e.NewValue;
+                }
+            }
+        }
+
+        private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FluentIconElement self && e.NewValue is double fontSize)
+            {
+                if (self.IconSource is FluentIconSource source)
+                {
+                    // Set internal source to the new symbol
+                    source.FontSize = fontSize;
                 }
             }
         }

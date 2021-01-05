@@ -4,21 +4,23 @@
     xmlns:local="using:Fluent.Icons.Compact">
 
     <Style TargetType="local:FluentSymbolIcon">
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:FluentSymbolIcon">
-                    <FontIcon x:Name="IconDisplay"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              Foreground="{TemplateBinding Foreground}"
-                              Width="{TemplateBinding Width}"
-                              Height="{TemplateBinding Height}"
-                              MaxWidth="{TemplateBinding MaxWidth}"
-                              MaxHeight="{TemplateBinding MaxHeight}"
-                              MinWidth="{TemplateBinding MinWidth}"
-                              MinHeight="{TemplateBinding MinHeight}"
-                              Margin="{TemplateBinding Margin}"
-                              FontFamily="/Assets/FluentUI-System-Icons.ttf#FluentUI-System-Icons"/>
+                    <local:FluentIconElement x:Name="IconDisplay"
+                                             Symbol="{TemplateBinding Symbol}"
+                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             Width="{TemplateBinding Width}"
+                                             Height="{TemplateBinding Height}"
+                                             MaxWidth="{TemplateBinding MaxWidth}"
+                                             MaxHeight="{TemplateBinding MaxHeight}"
+                                             MinWidth="{TemplateBinding MinWidth}"
+                                             MinHeight="{TemplateBinding MinHeight}"
+                                             Margin="{TemplateBinding Margin}"
+                                             FontSize="{TemplateBinding FontSize}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

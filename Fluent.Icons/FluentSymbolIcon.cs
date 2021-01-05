@@ -15,6 +15,7 @@ namespace Fluent.Icons.Compact
         public FluentSymbolIcon()
         {
             DefaultStyleKey = typeof(FluentSymbolIcon);
+            FontFamily = FSIFontFamily;
         }
 
         /// <summary>
@@ -23,6 +24,7 @@ namespace Fluent.Icons.Compact
         public FluentSymbolIcon(FluentSymbol symbol)
         {
             DefaultStyleKey = typeof(FluentSymbolIcon);
+            FontFamily = FSIFontFamily;
             Symbol = symbol;
         }
 
@@ -35,11 +37,11 @@ namespace Fluent.Icons.Compact
             set { SetValue(SymbolProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Identifies the <see cref="Symbol"/> property.
+        /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            "Symbol",
-            typeof(FluentSymbol), typeof(FluentSymbolIcon),
-            new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentSymbolIcon), new PropertyMetadata(null)
         );
 
         /// <inheritdoc/>
