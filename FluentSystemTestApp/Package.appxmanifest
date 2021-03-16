@@ -15,7 +15,7 @@
 
   <Properties>
     <DisplayName>FluentSystemTestApp</DisplayName>
-    <PublisherDisplayName>jjask</PublisherDisplayName>
+    <PublisherDisplayName>Joshua Askharoun</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
