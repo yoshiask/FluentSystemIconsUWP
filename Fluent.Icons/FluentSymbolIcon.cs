@@ -33,10 +33,11 @@ namespace Fluent.Icons
             set { SetValue(SymbolProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Identifies the <see cref="Symbol"/> property.
+        /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            "Symbol",
-            typeof(FluentSymbol), typeof(FluentSymbolIcon),
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentSymbolIcon),
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
         );
 
@@ -57,7 +58,7 @@ namespace Fluent.Icons
         {
             if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int) && self.iconDisplay != null)
             {
-                // Set internal Image to the SvgImageSource from the look-up table
+                // Set internal Data to the Path from the look-up table
                 self.iconDisplay.Data = GetPathData((FluentSymbol)e.NewValue);
             }
         }

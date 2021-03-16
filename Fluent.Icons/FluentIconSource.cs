@@ -8,6 +8,9 @@ namespace Fluent.Icons
     /// </summary>
     public class FluentIconSource : PathIconSource
     {
+        /// <summary>
+        /// Constructs an empty <see cref="FluentIconSource"/>.
+        /// </summary>
         public FluentIconSource() { }
 
         /// <summary>
@@ -27,13 +30,11 @@ namespace Fluent.Icons
             set { SetValue(SymbolProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
         /// <summary>
         /// Identifies the <see cref="Symbol"/> property.
         /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            "Symbol",
-            typeof(FluentSymbol), typeof(FluentIconSource),
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentIconSource),
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
         );
 
@@ -41,7 +42,7 @@ namespace Fluent.Icons
         {
             if (d is FluentIconSource self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
-                // Set internal Image to the SvgImageSource from the look-up table
+                // Set internal Data to the Path from the look-up table
                 self.Data = FluentSymbolIcon.GetPathData((FluentSymbol)e.NewValue);
             }
         }

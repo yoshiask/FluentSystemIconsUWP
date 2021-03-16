@@ -6,17 +6,14 @@ using Windows.UI.Xaml.Controls;
 namespace Fluent.Icons
 {
     /// <summary>
-    /// Represents an icon that uses a <see cref="FluentIconSource"/> as its content.
+    /// Represents an icon that uses a <see cref="FluentSymbol"/> for its content.
     /// </summary>
-    public sealed class FluentIconElement : IconSourceElement
+    public sealed class FluentIconElement : PathIcon
     {
         /// <summary>
         /// Constructs an empty <see cref="FluentIconElement"/>.
         /// </summary>
-        public FluentIconElement()
-        {
-            IconSource = new FluentIconSource();
-        }
+        public FluentIconElement() { }
 
         /// <summary>
         /// Constructs a <see cref="FluentIconElement"/> displaying the specified symbol.
@@ -24,7 +21,7 @@ namespace Fluent.Icons
         /// <param name="symbol"></param>
         public FluentIconElement(FluentSymbol symbol)
         {
-            IconSource = new FluentIconSource(symbol);
+            Symbol = symbol;
         }
 
         /// <summary>
@@ -32,7 +29,7 @@ namespace Fluent.Icons
         /// </summary>
         public FluentIconElement(FluentIconSource source)
         {
-            IconSource = source;
+            Data = source.Data;
         }
 
         /// <summary>
@@ -44,13 +41,11 @@ namespace Fluent.Icons
             set { SetValue(SymbolProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Symbol.  This enables animation, styling, binding, etc...
         /// <summary>
         /// Identifies the <see cref="Symbol"/> property.
         /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            "Symbol",
-            typeof(FluentSymbol), typeof(FluentIconSource),
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentIconSource),
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
         );
 
@@ -58,11 +53,8 @@ namespace Fluent.Icons
         {
             if (d is FluentIconElement self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
-                if (self.IconSource is FluentIconSource source)
-                {
-                    // Set internal source to the new symbol
-                    source.Symbol = (FluentSymbol)e.NewValue;
-                }
+                // Set internal Data to the Path from the look-up table
+                self.Data = FluentSymbolIcon.GetPathData((FluentSymbol)e.NewValue);
             }
         }
     }
