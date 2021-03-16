@@ -7,7 +7,7 @@
         <authors>Joshua Askharoun</authors>
         <owners>Joshua Askharoun</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <license type="expression">GPL-3.0-only</license>
+        <license type="expression">LGPL-3.0-only</license>
         <projectUrl>https://github.com/yoshiask/FluentSystemIconsUWP/</projectUrl>
 				<repository type="git" url="https://github.com/yoshiask/FluentSystemIconsUWP.git" />
 				<icon>Logo.png</icon>

@@ -1,18 +1,18 @@
 # This is a basic workflow to help you get started with Actions
 
-name: FluentSystemIcons.CI
+name: FluentSystemIcons.Compact.CI
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
     branches: 
-    - release/*
+    - release/compact/*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-compact:
     # The type of runner that the job will run on
     runs-on: windows-latest
     
