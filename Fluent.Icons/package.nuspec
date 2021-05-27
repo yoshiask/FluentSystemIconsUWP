@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Fluent.Icons.Compact</id>
-    <version>1.1.90.1</version>
+    <version>1.1.125.0</version>
     <title>Fluent.Icons.Compact</title>
     <authors>Joshua Askharoun</authors>
     <owners>Joshua Askharoun</owners>
@@ -11,8 +11,8 @@
     <projectUrl>https://github.com/yoshiask/FluentSystemIconsUWP/</projectUrl>
     <repository type="git" url="https://github.com/yoshiask/FluentSystemIconsUWP.git" />
     <icon>Logo.png</icon>
-    <description>An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons. Requires UAP &gt;= 10.0.15063. This version of Fluent.Icons uses an icon font, which reduces the library size at the expense of scaling (e.g. 16, 24, 48) options.</description>
-    <releaseNotes>Updated library to sync with FSI 1.1.90</releaseNotes>
+    <description>An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons. Requires UAP &gt;= 10.0.15063. This version of Fluent.Icons uses an icon font, which reduces the library size at the expense of explicit scaling (e.g. 16, 24, 48) options.</description>
+    <releaseNotes>Updated library to sync with FSI 1.1.125 and fixed font embedding</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>UWP Fluent Design UI Microsoft Fabric Icons</tags>
     <dependencies>
@@ -27,6 +27,7 @@
     <!-- Resources -->
     <file src="bin\Release\Fluent.Icons.pdb" target="lib\uap10.0.15063" />
     <file src="bin\Release\Fluent.Icons.pri" target="lib\uap10.0.15063" />
+    <file src="bin\Release\Assets\FluentUI-System-Icons.ttf" target="lib\uap10.0.15063" />
     <!-- IntelliSense -->
     <file src="bin\Release\Fluent.Icons.xml" target="lib\uap10.0.15063" />
     <!-- XAML control -->
