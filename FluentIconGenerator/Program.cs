@@ -71,7 +71,7 @@ namespace Fluent.Icons
                     // Load the path data into a string
                     var svg = new XmlDocument();
                     svg.Load(path);
-                    // create ns manager
+                    // Create namespace manager
                     XmlNamespaceManager xmlnsManager = new XmlNamespaceManager(svg.NameTable);
                     xmlnsManager.AddNamespace("svg", "http://www.w3.org/2000/svg");
 
