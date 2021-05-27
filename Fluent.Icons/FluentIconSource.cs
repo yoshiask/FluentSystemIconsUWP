@@ -43,7 +43,7 @@ namespace Fluent.Icons.Compact
         {
             if (d is FluentIconSource self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
-                // Set internal Image to the SvgImageSource from the look-up table
+                // Set internal Image to the glyph from the look-up table
                 self.Glyph = FluentSymbolIcon.GetGlyph((FluentSymbol)e.NewValue);
             }
         }

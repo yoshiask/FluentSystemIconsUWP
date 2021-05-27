@@ -1,22 +1,20 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
 namespace Fluent.Icons.Compact
 {
-    /// <summary>
-    /// Represents an icon that uses a <see cref="FluentIconSource"/> as its content.
+    /// Represents an icon that uses a <see cref="FluentSymbol"/> for its content.
     /// </summary>
-    public sealed class FluentIconElement : IconSourceElement
+    public sealed class FluentIconElement : FontIcon
     {
         /// <summary>
         /// Constructs an empty <see cref="FluentIconElement"/>.
         /// </summary>
         public FluentIconElement()
         {
-            IconSource = new FluentIconSource();
+            FontFamily = FluentSymbolIcon.FSIFontFamily;
         }
 
         /// <summary>
@@ -25,7 +23,8 @@ namespace Fluent.Icons.Compact
         /// <param name="symbol"></param>
         public FluentIconElement(FluentSymbol symbol)
         {
-            IconSource = new FluentIconSource(symbol);
+            FontFamily = FluentSymbolIcon.FSIFontFamily;
+            Symbol = symbol;
         }
 
         /// <summary>
@@ -33,7 +32,8 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public FluentIconElement(FluentIconSource source)
         {
-            IconSource = source;
+            FontFamily = source.FontFamily;
+            Glyph = source.Glyph;
         }
 
         /// <summary>
@@ -54,44 +54,12 @@ namespace Fluent.Icons.Compact
             new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
         );
 
-        /// <summary>
-        /// Gets or sets the Fluent System Icons glyph used as the icon content.
-        /// </summary>
-        public double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-
-        /// <summary>
-        /// Identifies the <see cref="Symbol"/> property.
-        /// </summary>
-        public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
-            nameof(FontSize), typeof(double), typeof(FluentIconElement),
-            new PropertyMetadata(24, new PropertyChangedCallback(OnFontSizeChanged))
-        );
-
         private static void OnSymbolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is FluentIconElement self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
-                if (self.IconSource is FluentIconSource source)
-                {
-                    // Set internal source to the new symbol
-                    source.Symbol = (FluentSymbol)e.NewValue;
-                }
-            }
-        }
-
-        private static void OnFontSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is FluentIconElement self && e.NewValue is double fontSize)
-            {
-                if (self.IconSource is FluentIconSource source)
-                {
-                    // Set internal source to the new symbol
-                    source.FontSize = fontSize;
-                }
+                // Set internal Image to the glpyh from the look-up table
+                self.Glyph = FluentSymbolIcon.GetGlyph((FluentSymbol)e.NewValue);
             }
         }
     }
