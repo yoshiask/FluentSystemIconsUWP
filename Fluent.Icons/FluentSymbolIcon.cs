@@ -8,7 +8,7 @@ namespace Fluent.Icons.Compact
 {
     public partial class FluentSymbolIcon : Control
     {
-        public static FontFamily FSIFontFamily = new FontFamily("/Assets/FluentUI-System-Icons.ttf#FluentUI-System-Icons");
+        public static FontFamily FSIFontFamily = new FontFamily("ms-appx:///Fluent.Icons.Compact/Assets/FluentUI-System-Icons.ttf#FluentUI-System-Icons");
 
         private FontIcon iconDisplay;
 
