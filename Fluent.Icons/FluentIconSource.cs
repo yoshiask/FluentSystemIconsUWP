@@ -8,9 +8,13 @@ namespace Fluent.Icons.Compact
     /// </summary>
     public class FluentIconSource : FontIconSource
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FluentIconSource"/> class.
+        /// </summary>
         public FluentIconSource()
         {
-            FontFamily = FluentSymbolIcon.FSIFontFamily;
+            FontFamily = FluentSymbolIcon.FSIRegularFontFamily;
+            FontSize = 32;
         }
 
         /// <summary>
@@ -18,7 +22,8 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public FluentIconSource(FluentSymbol symbol)
         {
-            FontFamily = FluentSymbolIcon.FSIFontFamily;
+            FontFamily = FluentSymbolIcon.GetFontFamilyForSymbol(symbol);
+            FontSize = 32;
             Symbol = symbol;
         }
 
@@ -36,15 +41,17 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
             nameof(Symbol), typeof(FluentSymbol), typeof(FluentIconSource),
-            new PropertyMetadata(null, new PropertyChangedCallback(OnSymbolChanged))
+            new PropertyMetadata(null, OnSymbolChanged)
         );
 
         private static void OnSymbolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is FluentIconSource self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
-                // Set internal Image to the glyph from the look-up table
-                self.Glyph = FluentSymbolIcon.GetGlyph((FluentSymbol)e.NewValue);
+                // Set glpyh and font family
+                FluentSymbol symbol = (FluentSymbol)e.NewValue;
+                self.Glyph = FluentSymbolIcon.GetGlyph(symbol);
+                self.FontFamily = FluentSymbolIcon.GetFontFamilyForSymbol(symbol);
             }
         }
     }

@@ -2,20 +2,30 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-// The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
-
 namespace Fluent.Icons.Compact
 {
-    public partial class FluentSymbolIcon : Control
+    /// <summary>
+    /// Represents an icon that uses a glyph from the Fluent System Icons font as its content.
+    /// </summary>
+    public partial class FluentSymbolIcon : FontIcon
     {
-        public static FontFamily FSIFontFamily = new FontFamily("ms-appx:///Fluent.Icons.Compact/Assets/FluentUI-System-Icons.ttf#FluentUI-System-Icons");
+        /// <summary>
+        /// The font family for displaying Fluent System Icons.
+        /// </summary>
+        public static FontFamily FSIRegularFontFamily = new FontFamily("ms-appx:///Fluent.Icons.Compact/Assets/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular");
 
-        private FontIcon iconDisplay;
+        /// <summary>
+        /// The font family for displaying filled Fluent System Icons.
+        /// </summary>
+        public static FontFamily FSIFilledFontFamily = new FontFamily("ms-appx:///Fluent.Icons.Compact/Assets/FluentSystemIcons-Filled.ttf#FluentSystemIcons-Filled");
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FluentSymbolIcon"/> class.
+        /// </summary>
         public FluentSymbolIcon()
         {
-            DefaultStyleKey = typeof(FluentSymbolIcon);
-            FontFamily = FSIFontFamily;
+            FontFamily = FSIRegularFontFamily;
+            FontSize = 32;
         }
 
         /// <summary>
@@ -23,8 +33,8 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public FluentSymbolIcon(FluentSymbol symbol)
         {
-            DefaultStyleKey = typeof(FluentSymbolIcon);
-            FontFamily = FSIFontFamily;
+            FontFamily = GetFontFamilyForSymbol(symbol);
+            FontSize = 32;
             Symbol = symbol;
         }
 
@@ -41,45 +51,33 @@ namespace Fluent.Icons.Compact
         /// Identifies the <see cref="Symbol"/> property.
         /// </summary>
         public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(
-            nameof(Symbol), typeof(FluentSymbol), typeof(FluentSymbolIcon), new PropertyMetadata(null)
+            nameof(Symbol), typeof(FluentSymbol), typeof(FluentSymbolIcon), new PropertyMetadata(null, OnSymbolChanged)
         );
-
-        /// <inheritdoc/>
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            if (GetTemplateChild("IconDisplay") is FontIcon pi)
-            {
-                iconDisplay = pi;
-                // Awkward workaround for a weird bug where iconDisplay is null
-                // when OnSymbolChanged fires in a newly created FluentSymbolIcon
-                Symbol = Symbol;
-            }
-        }
 
         private static void OnSymbolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int) && self.iconDisplay != null)
+            if (d is FluentSymbolIcon self && (e.NewValue is FluentSymbol || e.NewValue is int))
             {
-                // Set internal Image to the SvgImageSource from the look-up table
-                self.iconDisplay.Glyph = GetGlyph((FluentSymbol)e.NewValue);
+                // Set internal glpyh and font family
+                FluentSymbol symbol = (FluentSymbol)e.NewValue;
+                self.Glyph = GetGlyph(symbol);
+                self.FontFamily = GetFontFamilyForSymbol(symbol);
             }
         }
 
         /// <summary>
-        /// Returns a new <see cref="PathIcon"/> using the path associated with the provided <see cref="FluentSymbol"/>.
+        /// Returns a <see cref="FontIcon"/> with the glyph associated with the provided <see cref="FluentSymbol"/>.
         /// </summary>
         public static FontIcon GetFontIcon(FluentSymbol symbol)
         {
             return new FontIcon {
                 Glyph = GetGlyph(symbol),
-                FontFamily = FSIFontFamily
+                FontFamily = GetFontFamilyForSymbol(symbol)
             };
         }
 
         /// <summary>
-        /// Returns a new <see cref="Geometry"/> using the path associated with the provided <see cref="int"/>.
+        /// Returns the glyph associated with the provided <see cref="int"/>.
         /// The <paramref name="symbol"/> parameter is cast to <see cref="FluentSymbol"/>.
         /// </summary>
         public static string GetGlyph(int symbol)
@@ -88,11 +86,25 @@ namespace Fluent.Icons.Compact
         }
 
         /// <summary>
-        /// Returns a new <see cref="Geometry"/> using the path associated with the provided <see cref="int"/>.
+        /// Returns the glyph associated with the provided <see cref="FluentSymbol"/>.
         /// </summary>
         public static string GetGlyph(FluentSymbol symbol)
         {
-            return unchecked((char)symbol).ToString();
+            // Convert the bottom 4 bytes to a char
+            uint charCode = (uint)symbol & 0xFFFF;
+            return ((char)charCode).ToString();
+        }
+
+        /// <summary>
+        /// Returns the font family required to display the <paramref name="symbol"/>.
+        /// </summary>
+        public static FontFamily GetFontFamilyForSymbol(FluentSymbol symbol)
+        {
+            // Get the next highest bit to see if this is the filled variant
+            uint highBit = ((uint)symbol) >> (sizeof(char) * 8);
+            return highBit == 1
+                ? FSIFilledFontFamily
+                : FSIRegularFontFamily;
         }
     }
 }

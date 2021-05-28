@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fluent="using:Fluent.Icons.Compact"
-    xmlns:ext="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -19,22 +18,22 @@
         <NavigationView.MenuItems>
             <NavigationViewItem Content="Navigate">
                 <NavigationViewItem.Icon>
-                    <fluent:FluentIconElement Symbol="Directions"/>
+                    <fluent:FluentSymbolIcon Symbol="Directions24"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Discover">
                 <NavigationViewItem.Icon>
-                    <fluent:FluentIconElement Symbol="Pin"/>
+                    <fluent:FluentSymbolIcon Symbol="Pin16"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Explore">
                 <NavigationViewItem.Icon>
-                    <fluent:FluentIconElement Symbol="Home"/>
+                    <fluent:FluentSymbolIcon Symbol="Home16"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Favorites">
                 <NavigationViewItem.Icon>
-                    <fluent:FluentIconElement Symbol="Star"/>
+                    <fluent:FluentSymbolIcon Symbol="Star16"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
         </NavigationView.MenuItems>
@@ -50,7 +49,7 @@
                     <DataTemplate x:DataType="fluent:FluentSymbol">
                         <ListViewItem>
                             <StackPanel Spacing="10" Orientation="Horizontal">
-                                <fluent:FluentSymbolIcon Symbol="{x:Bind}"/>
+                                <fluent:FluentSymbolIcon Symbol="{x:Bind}" FontSize="32"/>
                                 <TextBlock Text="{x:Bind}" VerticalAlignment="Center"/>
                             </StackPanel>
                         </ListViewItem>
@@ -62,7 +61,7 @@
                 <Button Style="{ThemeResource ButtonRevealStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center">
                     <StackPanel Spacing="5" Orientation="Horizontal">
-                        <fluent:FluentSymbolIcon Symbol="FolderAdd" FontSize="64"/>
+                        <fluent:FluentSymbolIcon Symbol="FolderAdd16" FontSize="64"/>
                         <TextBlock Text="New folder" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -74,34 +73,34 @@
         <CommandBar>
             <AppBarButton Label="Add">
                 <AppBarButton.Icon>
-                    <fluent:FluentIconElement Symbol="Add"/>
+                    <fluent:FluentSymbolIcon Symbol="Add16"/>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Edit">
                 <AppBarButton.Icon>
-                    <fluent:FluentIconElement Symbol="Edit"/>
+                    <fluent:FluentSymbolIcon Symbol="Edit16"/>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton Label="Share">
                 <AppBarButton.Icon>
-                    <fluent:FluentIconElement Symbol="Share"/>
+                    <fluent:FluentSymbolIcon Symbol="Share16"/>
                 </AppBarButton.Icon>
             </AppBarButton>
 
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Add">
                     <AppBarButton.Icon>
-                        <fluent:FluentIconElement Symbol="AddFilled"/>
+                        <fluent:FluentSymbolIcon Symbol="Add16Filled"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="Edit">
                     <AppBarButton.Icon>
-                        <fluent:FluentIconElement Symbol="EditFilled"/>
+                        <fluent:FluentSymbolIcon Symbol="Edit16Filled"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="Share">
                     <AppBarButton.Icon>
-                        <fluent:FluentIconElement Symbol="ShareFilled"/>
+                        <fluent:FluentSymbolIcon Symbol="Share16Filled"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.SecondaryCommands>

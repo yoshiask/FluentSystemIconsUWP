@@ -20,10 +20,10 @@ namespace FluentSystemTestApp
             this.InitializeComponent();
 
             ButtonPanel.Children.Add(
-                new FluentSymbolIcon(FluentSymbol.Icons)
+                new FluentSymbolIcon(FluentSymbol.Icons24)
             );
             ButtonPanel.Children.Add(
-                new FluentIconElement(FluentSymbol.AppFolder)
+                new FluentSymbolIcon(FluentSymbol.AppFolder24)
                 {
                     HorizontalAlignment = HorizontalAlignment.Center
                 }
