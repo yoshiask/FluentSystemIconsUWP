@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">LGPL-3.0-only</license>
     <projectUrl>https://github.com/yoshiask/FluentSystemIconsUWP/</projectUrl>
-    <repository type="git" url="https://github.com/yoshiask/FluentSystemIconsUWP.git" />
+    <repository type="git" url="https://github.com/yoshiask/FluentSystemIconsUWP" />
     <icon>Logo.png</icon>
     <description>An unofficial UWP library that provides easy access to Microsoft's Fluent System Icons. Requires UAP &gt;= 10.0.15063. This version of Fluent.Icons uses an icon font, which reduces the library size at the expense of explicit scaling (e.g. 16, 24, 48) options.</description>
     <releaseNotes>Updated library to sync with FSI 1.1.125 and fixed font embedding</releaseNotes>
