@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -82,7 +83,8 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public static string GetGlyph(int symbol)
         {
-            return GetGlyph((FluentSymbol)symbol);
+            var bytes = BitConverter.GetBytes(Math.Abs(symbol));
+            return System.Text.Encoding.Unicode.GetString(bytes, 0, bytes.Length);
         }
 
         /// <summary>
@@ -90,9 +92,7 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public static string GetGlyph(FluentSymbol symbol)
         {
-            // Convert the bottom 4 bytes to a char
-            uint charCode = (uint)symbol & 0xFFFF;
-            return ((char)charCode).ToString();
+            return GetGlyph((int)symbol);
         }
 
         /// <summary>
@@ -100,9 +100,7 @@ namespace Fluent.Icons.Compact
         /// </summary>
         public static FontFamily GetFontFamilyForSymbol(FluentSymbol symbol)
         {
-            // Get the next highest bit to see if this is the filled variant
-            uint highBit = ((uint)symbol) >> (sizeof(char) * 8);
-            return highBit == 1
+            return (long)symbol < 0
                 ? FSIFilledFontFamily
                 : FSIRegularFontFamily;
         }

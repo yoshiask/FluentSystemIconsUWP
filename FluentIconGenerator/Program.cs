@@ -28,9 +28,11 @@ namespace FluentIconGenerator
                 : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                   "source", "repos", "FluentSystemIcons", "Fluent.Icons");
             string outputFile = Path.Combine(outputProj, "FluentSymbolIcon.g.cs");
-            Regex nameRx = new Regex(@"\""ic_fluent_(?<name>[a-z0-9_]+)+_(?<size>\d+)_(?<type>regular|filled)"":\s*""(?<charcode>\w+)""");
+            Regex nameRx = new Regex(
+                @"""ic_fluent_(?<name>[a-z0-9_]+)+_(?<size>\d+)_(?<type>regular|filled)"":\s*""(?<charcode>\w+)""",
+                RegexOptions.Compiled);
 
-            #region Source builder setup
+            // Set up source builder
             var sourceBuilder = new StringBuilder(@"namespace Fluent.Icons.Compact
 {
 
@@ -42,10 +44,9 @@ namespace FluentIconGenerator
     /// <summary>
     /// An enum listing all available Fluent System Icon symbols
     /// </summary>
-    public enum FluentSymbol {
+    public enum FluentSymbol : long {
 ");
             var FluentSymbolEnumBuilder = new StringBuilder();
-            #endregion
 
             string[] dictRegr = File.ReadAllLines(Path.Combine(fontsDir, DICT_REGR_FILENAME));
             string[] dictFill = File.ReadAllLines(Path.Combine(fontsDir, DICT_FILL_FILENAME));
@@ -86,10 +87,10 @@ namespace FluentIconGenerator
                 foreach (string namePart in name.Split('_'))
                     displayName += char.ToUpper(namePart[0]) + namePart.Substring(1);
 
-                // Set the next highest bit to indicate that this is the filled variant
-                uint charCode = (1u << (sizeof(char) * 8)) | Convert.ToUInt16(charCodeStr, 16);
+                // Make the charcode negative to flag it is filled
+                int charCode = -1 * Convert.ToInt32(charCodeStr, 16);
 
-                Console.WriteLine($"{displayName}{size}Filled = 0x{charCode:X4}");
+                Console.WriteLine($"{displayName}{size}Filled = 0x{Math.Abs(charCode):X4}");
                 FluentSymbolEnumBuilder.Append($"        {displayName}{size}Filled = 0x{charCode:X4},\r\n");
             }
 
